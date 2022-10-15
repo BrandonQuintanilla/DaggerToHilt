@@ -1,0 +1,55 @@
+En la migración es recomendable migrar por etapas
+
+** Migration Overview
+At the end of the migration, the code should be changed as follows:
+
+- All @Component/@Subcomponent (or if using dagger.android @ContributesAndroidInjector) usages should be removed.
+- All @Module classes should be annotated with @InstallIn.
+- All Application/Activity/Fragment/View/Service/BroadcastReceiver classes should be annotated with @AndroidEntryPoint (assuming use of injection in those classes).
+- Any code instantiating or propagating components (like interfaces on your Activity to expose the component) should be removed.
+
+** Planning the migration
+
+A. Eliminar AppComponent
+- References to AppComponent can be replaced by the Hilt-generated SingletonComponent (link to all generated components) that maps to the Component you're migrating in your app.
+1. Instalar los modulos en el SingletonComponent generado porHilt con la anotacion @InstallIn(SingletonComponent::class)
+2. En cada Activity y Fragment dejar de referenciar appCompoenent sino SingletonComponent para la funcion inject con un entrypoint manual
+	De esta forma podemos mantener nuestros subcomponentes al instalarlos en el SingletonComponentde Hilt.
+	
+    @InstallIn(SingletonComponent::class)
+    @EntryPoint
+    interface RegistrationEntryPoint {
+        fun registrationComponent(): RegistrationComponent.Factory
+    }
+/////
+   --onCreate
+    val entryPoint = EntryPointAccessors.fromApplication(applicationContext, RegistrationEntryPoint::class.java)
+    registrationComponent = entryPoint.registrationComponent().create()
+
+///Tener en cuenta
+Para clases como Dagger.UserManager. O cualquier clase expuesta en AppComponent usada(referenciada) en más de una clase dependiente.
+
+Entry points are usually declared in the class they are used. 
+If an EntryPoint is used in more than one class, you can declare the EntryPoint in a new class and place it in a common package such as util.
+
+3. Recordar que "Context is already available as a predefined binding". Por lo tanto, cualquier inyeccion manual debe ser reemplazada por  @ApplicationContext.
+
+4. You need to check the component code for inject() methods and annotate the corresponding classes with @AndroidEntryPoint. 
+5. RemoveAppcomponentClass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
