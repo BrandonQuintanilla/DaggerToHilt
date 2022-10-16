@@ -16,7 +16,7 @@
 
 package com.example.android.dagger.di
 
-import com.example.android.dagger.registration.RegistrationComponent
+//import com.example.android.dagger.registration.RegistrationComponent
 import com.example.android.dagger.user.UserComponent
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -27,7 +27,7 @@ import dagger.hilt.migration.DisableInstallInCheck
 @InstallIn(SingletonComponent::class)// Install this module in Hilt-generated SingletonComponent
 @Module(
     subcomponents = [
-        RegistrationComponent::class,
+//        RegistrationComponent::class,
 //        LoginComponent::class,
         UserComponent::class
     ]

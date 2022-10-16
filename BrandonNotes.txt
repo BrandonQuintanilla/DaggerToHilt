@@ -45,6 +45,9 @@ To make Hilt generate a component for the LoginActivity and inject it,
  you need to annotate the activity with @AndroidEntryPoint.
  And that´s all, since Hilt will generate the Dagger related code.
 You can safely delete LoginComponent from subcomponents list since Hilt will generate the bindings for you
+
+Open RegistrationViewModel change @ActivityScope annotation with the @ActivityScoped.
+Hilt provides built in lifecycle scopes to support this.
 8.
 
 9.
