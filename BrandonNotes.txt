@@ -35,17 +35,21 @@ If an EntryPoint is used in more than one class, you can declare the EntryPoint 
 3. Recordar que "Context is already available as a predefined binding". Por lo tanto, cualquier inyeccion manual debe ser reemplazada por  @ApplicationContext.
 
 4. You need to check the component code for inject() methods and annotate the corresponding classes with @AndroidEntryPoint. 
-5. RemoveAppcomponentClass
+5. Since you already added EntryPoints for all the components listed in AppComponent.kt, you can delete AppComponent.kt.
 
+6. Now that you migrated the Application component and laid out the groundwork, you can migrate each Component to Hilt one by one.
 
+7. Para migrar subcomponente por subcomponente, eliminamos el LoginComponent.
+Podemos usar el ActivityComponent.
+To make Hilt generate a component for the LoginActivity and inject it,
+ you need to annotate the activity with @AndroidEntryPoint.
+ And that´s all, since Hilt will generate the Dagger related code.
+You can safely delete LoginComponent from subcomponents list since Hilt will generate the bindings for you
+8.
 
+9.
 
-
-
-
-
-
-
+10.
 
 
 
