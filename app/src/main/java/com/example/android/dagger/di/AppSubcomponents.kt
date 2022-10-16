@@ -17,7 +17,6 @@
 package com.example.android.dagger.di
 
 //import com.example.android.dagger.registration.RegistrationComponent
-import com.example.android.dagger.user.UserComponent
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
@@ -29,7 +28,7 @@ import dagger.hilt.migration.DisableInstallInCheck
     subcomponents = [
 //        RegistrationComponent::class,
 //        LoginComponent::class,
-        UserComponent::class
+//        UserComponent::class
     ]
 )
 @DisableInstallInCheck

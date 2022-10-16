@@ -48,7 +48,14 @@ You can safely delete LoginComponent from subcomponents list since Hilt will gen
 
 Open RegistrationViewModel change @ActivityScope annotation with the @ActivityScoped.
 Hilt provides built in lifecycle scopes to support this.
-8.
+
+8. Migrar el caso particular de UserComponent annotated with @LoggedUserScope(ts lifecycle is not managed by an Android class)
+   * OBS >  adding a custom component in the middle of the generated Hilt hierarchy is not supported
+  Options:
+        1.Leave Hilt and Dagger side by side in the state the project is currently in.
+        2.Migrate the scoped component to the closest available Hilt component (SingletonComponent in this case) and use nullability when needed.
+
+
 
 9.
 
